@@ -4,16 +4,16 @@ pinger.config = {
     'tickspeed': 1000,
     'popularity': 1,
     'chances': {
-        'notification': 20,
+        'notification': 45,
         'mute': 20,
         'join': 20,
         'leave': 20,
-        'call': 20,
+        'call': 5,
     },
-    'eastereggs': {
-        'call-remix': 0.1
+    'easteregg': {
+        'call': 0.1
     },
-    'callOnly': ['mute', 'leave']
+    'callOnly': ['mute', 'leave', 'join']
 }
 pinger.active = false;
 pinger.inCall = false;
@@ -25,11 +25,15 @@ pinger.sounds = {
     'join': 'assets/join.mp3',
     'leave': 'assets/leave.mp3',
     'call': 'assets/call.mp3',
-    'call-remix': 'assets/call-remix.mp3',
+    'call-easteregg': 'assets/call-remix.mp3',
 }
 
 pinger.play = function() {
     function playSound(option) {
+        if (pinger.config.easteregg.hasOwnProperty(option)) {
+            if ((Math.random() < pinger.config.easteregg[option]) ? true : false)
+            option += '-easteregg'
+        }
         const path = pinger.sounds[option]
         const audio = new Audio(path)
         audio.play()
@@ -54,6 +58,7 @@ pinger.play = function() {
 
 pinger.start = function() {
     if (pinger.active === true) { console.log('[ Pinger ] Already active'); return }
+    pinger.active = true;
     pinger.clock = setInterval(pinger.play, pinger.config.tickspeed)
     console.log('[ Pinger ] Started with tickspeed of ' + pinger.config.tickspeed + ' ms')
 }
@@ -62,4 +67,5 @@ pinger.stop = function() {
     if (pinger.active === false) { console.log('[ Pinger ] Already inactive'); return }
     clearInterval(pinger.clock)
     console.log('[ Pinger ] Stopped')
+    pinger.active = false;
 }
