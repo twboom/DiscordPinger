@@ -14,6 +14,8 @@ pinger.config = {
         'call-remix': 0.1
     }
 }
+pinger.active = false;
+pinger.inCall = false;
 
 // Sounds and the paths
 pinger.sounds = {
@@ -30,11 +32,10 @@ pinger.play = function() {
         const path = pinger.sounds[option]
         const audio = new Audio(path)
         audio.play()
+        console.log('[ Pinger ] Played ' + option)
     }
 
     const stop = (Math.random() < pinger.config.popularity) ? false : true;
-    console.log('Tick')
-    console.log(stop)
     if (stop) { return }
 
     let options = []
@@ -48,9 +49,13 @@ pinger.play = function() {
 }
 
 pinger.start = function() {
+    if (pinger.active === true) { console.log('[ Pinger ] Already active'); return }
     pinger.clock = setInterval(pinger.play, pinger.config.tickspeed)
+    console.log('[ Pinger ] Started with tickspeed of ' + pinger.config.tickspeed + ' ms')
 }
 
 pinger.stop = function() {
+    if (pinger.active === false) { console.log('[ Pinger ] Already inactive'); return }
     clearInterval(pinger.clock)
+    console.log('[ Pinger ] Stopped')
 }
