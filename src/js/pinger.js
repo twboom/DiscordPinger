@@ -2,6 +2,7 @@ let pinger = []
 // Config
 pinger.config = {
     'tickspeed': 1000,
+    'popularity': 0.1,
     'chances': {
         'notification': 20,
         'mute': 20,
@@ -25,6 +26,17 @@ pinger.sounds = {
 }
 
 pinger.play = function() {
+    function playSound(option) {
+        const path = pinger.sounds[option]
+        const audio = new Audio(path)
+        audio.play()
+    }
+
+    const stop = (Math.random() < pinger.config.popularity) ? false : true;
+    console.log('Tick')
+    console.log(stop)
+    if (stop) { return }
+
     let options = []
     for (const [key, value] of Object.entries(pinger.config.chances)) {
         for (let i = 0; i < value; i++) {
@@ -32,6 +44,7 @@ pinger.play = function() {
         }
     }
     const option = options[Math.floor(Math.random() * options.length)]
+    playSound(option)
 }
 
 pinger.start = function() {
