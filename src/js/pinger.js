@@ -2,7 +2,7 @@ let pinger = []
 // Config
 pinger.config = {
     'tickspeed': 1000,
-    'popularity': 0.1,
+    'popularity': 1,
     'chances': {
         'notification': 20,
         'mute': 20,
@@ -12,7 +12,8 @@ pinger.config = {
     },
     'eastereggs': {
         'call-remix': 0.1
-    }
+    },
+    'callOnly': ['mute', 'leave']
 }
 pinger.active = false;
 pinger.inCall = false;
@@ -35,11 +36,14 @@ pinger.play = function() {
         console.log('[ Pinger ] Played ' + option)
     }
 
+    console.log('[ Pinger ] Tick')
+
     const stop = (Math.random() < pinger.config.popularity) ? false : true;
     if (stop) { return }
 
     let options = []
     for (const [key, value] of Object.entries(pinger.config.chances)) {
+        if (pinger.config.callOnly.includes(key) && pinger.inCall === false) { continue }
         for (let i = 0; i < value; i++) {
             options.push(key)
         }
