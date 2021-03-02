@@ -13,10 +13,19 @@ pinger.config = {
     'easteregg': {
         'call': 0.1
     },
-    'callOnly': ['mute', 'leave', 'join']
+    'callOnly': ['mute', 'leave', 'join'],
+    'ringTimeout': 30000 // This is in milliseconds
 }
 pinger.active = false;
 pinger.inCall = false;
+pinger.latestRing = 0;
+
+pinger.isRinging = function() {
+    const time = Date.now() - pinger.latestRing;
+    console.log(time)
+    if (time < pinger.config.ringTimeout) { return true }
+    else { return false }
+};
 
 // Sounds and the paths
 pinger.sounds = {
@@ -25,7 +34,7 @@ pinger.sounds = {
     'join': 'assets/join.mp3',
     'leave': 'assets/leave.mp3',
     'call': 'assets/call.mp3',
-    'call-easteregg': 'assets/call-remix.mp3',
+    'call-easteregg': 'assets/call-easteregg.mp3',
 }
 
 pinger.play = function() {
@@ -34,6 +43,7 @@ pinger.play = function() {
             if ((Math.random() < pinger.config.easteregg[option]) ? true : false)
             option += '-easteregg'
         }
+        if (option === 'call') { pinger.latestRing = Date.now() }
         const path = pinger.sounds[option]
         const audio = new Audio(path)
         audio.play()
@@ -47,6 +57,7 @@ pinger.play = function() {
 
     let options = []
     for (const [key, value] of Object.entries(pinger.config.chances)) {
+        if (key === 'call' && pinger.isRinging()) { continue }
         if (pinger.config.callOnly.includes(key) && pinger.inCall === false) { continue }
         for (let i = 0; i < value; i++) {
             options.push(key)
