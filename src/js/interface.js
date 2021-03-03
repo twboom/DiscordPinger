@@ -1,25 +1,11 @@
 pinger.interface = [];
 
-pinger.interface.config = {
-    'tickspeed': 10
-}
-
-pinger.interface.tickspeed = function() {
-    const display = document.querySelector('span.tickspeed.display');
-    const slider = document.querySelector('input#tickspeed')
-    display.innerHTML = slider.value
-    if (slider.value === pinger.config.tickspeed) { return };
-    pinger.config.tickspeed = slider.value * 1000;
-    pinger.update.tickspeed();
-}
-
-pinger.interface.popularity = function() {
-    const display = document.querySelector('span.popularity.display');
-    const slider = document.querySelector('input#popularity')
-    display.innerHTML = slider.value
-    if (slider.value === pinger.config.popularity) { return };
-    pinger.config.popularity = slider.value;
-    console.log('[ Pinger ] Updated popularity to ' + slider.value)
+pinger.interface.update = function(evt) {
+    const slider = evt.target;
+    console.log('[ Pinger ] Updating ' + slider.id + ' to ' + slider.value);
+    if (slider.id === 'tickspeed') { pinger.update.tickspeed(slider.value * 1000); return };
+    if (slider.id === 'popularity') { pinger.config.popularity = slider.value; return };
+    pinger.config.chances[slider.id] = slider.value;
 }
 
 pinger.interface.init = function() {
@@ -39,9 +25,6 @@ pinger.interface.init = function() {
     popularity();
 }
 
-document.querySelector('input#popularity').addEventListener('mouseup', pinger.interface.popularity)
-document.querySelector('input#tickspeed').addEventListener('mouseup', pinger.interface.tickspeed)
-
 document.querySelector('button#start').addEventListener('click', pinger.toggle)
 
 document.querySelector('button#openAdvanced').addEventListener('click', function() {
@@ -50,6 +33,10 @@ document.querySelector('button#openAdvanced').addEventListener('click', function
 
 document.querySelector('button#closeAdvanced').addEventListener('click', function() {
     document.querySelector('div#modal').style.display = 'none'
+})
+
+document.querySelectorAll('input').forEach(item => {
+    item.addEventListener('mouseup', pinger.interface.update)
 })
 
 pinger.interface.init()

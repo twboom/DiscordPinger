@@ -86,8 +86,9 @@ pinger.toggle = function() {
 }
 
 pinger.update = [];
-pinger.update.tickspeed = function() {
-    console.log('[ Pinger ] Updated tickspeed to ' + pinger.config.tickspeed / 1000 + ' seconds')
+pinger.update.tickspeed = function(tickspeed) {
+    console.log('[ Pinger ] Updated tickspeed to ' + tickspeed + ' seconds')
+    pinger.config.tickspeed = tickspeed
     if(pinger.active === false) { return };
     clearInterval(pinger.clock);
     pinger.clock = setInterval(pinger.play, pinger.config.tickspeed)
