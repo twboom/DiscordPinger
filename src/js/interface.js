@@ -9,25 +9,20 @@ pinger.interface.update = function(evt) {
 }
 
 pinger.interface.init = function() {
-    function tickspeed() {
-        const display = document.querySelector('span.tickspeed.display');
-        const slider = document.querySelector('input#tickspeed')
-        display.innerHTML = pinger.config.tickspeed / 1000;
-        slider.value = pinger.config.tickspeed / 1000;
-    }
-    function popularity() {
-        const display = document.querySelector('span.popularity.display');
-        const slider = document.querySelector('input#popularity')
-        display.innerHTML = pinger.config.popularity;
-        slider.value = pinger.config.popularity;
-    }
-    tickspeed();
-    popularity();
+    document.querySelectorAll('span.display').forEach(item => {
+        const label = item.classList[0]
+        const display = document.querySelector('span.' + label)
+        const slider = document.querySelector('input#' + label)
+        let value;
+        if (label === 'tickspeed' || label === 'popularity') { value = pinger.config[label] }
+        else { value = pinger.config.chances[label] };
+        if (label === 'tickspeed') { value /= 1000 }
+        display.innerHTML = value;
+        slider.value = value
+    })
 }
 
 document.querySelector('button#start').addEventListener('click', function(evt) {
-    console.log('hi')
-    console.log(evt.target.innerHTML)
     if (pinger.active === false) { evt.target.innerHTML = 'Stop'; pinger.toggle(); return };
     if (pinger.active === true) { evt.target.innerHTML = 'Start'; pinger.toggle(); return };
 })

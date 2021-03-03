@@ -70,4 +70,5 @@ div#advanced {
     background-color: black;
     width: 50%;
     margin: 15% auto;
+    overflow-y: auto;
 }
