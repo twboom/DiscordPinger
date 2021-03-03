@@ -25,7 +25,12 @@ pinger.interface.init = function() {
     popularity();
 }
 
-document.querySelector('button#start').addEventListener('click', pinger.toggle)
+document.querySelector('button#start').addEventListener('click', function(evt) {
+    console.log('hi')
+    console.log(evt.target.innerHTML)
+    if (pinger.active === false) { evt.target.innerHTML = 'Stop'; pinger.toggle(); return };
+    if (pinger.active === true) { evt.target.innerHTML = 'Start'; pinger.toggle(); return };
+})
 
 document.querySelector('button#openAdvanced').addEventListener('click', function() {
     document.querySelector('div#modal').style.display = 'block'
