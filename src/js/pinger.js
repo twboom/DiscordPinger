@@ -93,3 +93,21 @@ pinger.update.tickspeed = function(tickspeed) {
     clearInterval(pinger.clock);
     pinger.clock = setInterval(pinger.play, pinger.config.tickspeed)
 }
+
+pinger.webhook = [];
+pinger.webhook.config = {
+    'url': '',
+    'message': ''
+}
+
+pinger.webhook.send = function() {
+    if (pinger.webhook.config === '') { return }
+    const request = new XMLHttpRequest();
+    request.open('POST', pinger.webhook.config.url);
+    request.setRequestHeader('Content-type', 'application/json');
+    const params = {
+        username: 'DiscordPinger',
+        content: pinger.webhook.config.message
+    }
+    request.send(JSON.stringify(params))
+}
