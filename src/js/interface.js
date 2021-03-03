@@ -42,6 +42,6 @@ pinger.interface.init = function() {
 document.querySelector('input#popularity').addEventListener('mouseup', pinger.interface.popularity)
 document.querySelector('input#tickspeed').addEventListener('mouseup', pinger.interface.tickspeed)
 
-document.querySelector('button#start').addEventListener('click', pinger.start)
+document.querySelector('button#start').addEventListener('click', pinger.toggle)
 
 pinger.interface.init()

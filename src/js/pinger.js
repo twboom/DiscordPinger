@@ -80,6 +80,11 @@ pinger.stop = function() {
     pinger.active = false;
 }
 
+pinger.toggle = function() {
+    if (pinger.active === false) { pinger.start(); return };
+    if (pinger.active === true) { pinger.stop(); return };
+}
+
 pinger.update = [];
 pinger.update.tickspeed = function() {
     console.log('[ Pinger ] Updated tickspeed to ' + pinger.config.tickspeed / 1000 + ' seconds')
