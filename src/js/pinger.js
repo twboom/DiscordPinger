@@ -51,7 +51,7 @@ pinger.play = function() {
     }
 
     console.log('[ Pinger ] Tick')
-    
+    pinger.webhook.send()
 
     const stop = (Math.random() < pinger.config.popularity) ? false : true;
     if (stop) { return }
@@ -96,6 +96,7 @@ pinger.update.tickspeed = function(tickspeed) {
     pinger.clock = setInterval(pinger.play, pinger.config.tickspeed * 1000)
 }
 
+/* Real Discord pings */
 pinger.webhook = [];
 pinger.webhook.config = {
     'url': '',
@@ -104,7 +105,8 @@ pinger.webhook.config = {
 }
 
 pinger.webhook.send = function() {
-    if (pinger.webhook.config === '') { return }
+    if ((Math.random() < pinger.webhook.config.probability) ? false : true) { return }
+    if (pinger.webhook.config.url === '' || pinger.webhook.config.url === '') { return }
     const request = new XMLHttpRequest();
     request.open('POST', pinger.webhook.config.url);
     request.setRequestHeader('Content-type', 'application/json');
