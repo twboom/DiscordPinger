@@ -79,3 +79,11 @@ pinger.stop = function() {
     console.log('[ Pinger ] Stopped')
     pinger.active = false;
 }
+
+pinger.update = [];
+pinger.update.tickspeed = function() {
+    console.log('[ Pinger ] Updated tickspeed to ' + pinger.config.tickspeed / 1000 + ' seconds')
+    if(pinger.active === false) { return };
+    clearInterval(pinger.clock);
+    pinger.clock = setInterval(pinger.play, pinger.config.tickspeed)
+}
