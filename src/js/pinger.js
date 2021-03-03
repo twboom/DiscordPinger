@@ -1,7 +1,8 @@
-let pinger = []
+let pinger = [];
+pinger.utility = [];
 // Config
 pinger.config = {
-    'tickspeed': 1000, // This is in milliseconds
+    'tickspeed': 1, // This is in seconds
     'popularity': 0.2,
     'chances': {
         'notification': 45,
@@ -50,6 +51,7 @@ pinger.play = function() {
     }
 
     console.log('[ Pinger ] Tick')
+    
 
     const stop = (Math.random() < pinger.config.popularity) ? false : true;
     if (stop) { return }
@@ -69,8 +71,8 @@ pinger.play = function() {
 pinger.start = function() {
     if (pinger.active === true) { console.log('[ Pinger ] Already active'); return }
     pinger.active = true;
-    pinger.clock = setInterval(pinger.play, pinger.config.tickspeed)
-    console.log('[ Pinger ] Started with tickspeed of ' + pinger.config.tickspeed + ' ms')
+    pinger.clock = setInterval(pinger.play, pinger.config.tickspeed * 1000)
+    console.log('[ Pinger ] Started with tickspeed of ' + pinger.config.tickspeed + ' seconds')
 }
 
 pinger.stop = function() {
@@ -91,7 +93,7 @@ pinger.update.tickspeed = function(tickspeed) {
     pinger.config.tickspeed = tickspeed
     if(pinger.active === false) { return };
     clearInterval(pinger.clock);
-    pinger.clock = setInterval(pinger.play, pinger.config.tickspeed)
+    pinger.clock = setInterval(pinger.play, pinger.config.tickspeed * 1000)
 }
 
 pinger.webhook = [];

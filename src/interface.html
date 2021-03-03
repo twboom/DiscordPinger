@@ -66,13 +66,17 @@
         </div>
         <div id="webhookModal" class="modal">
             <div class="modalContent">
-                <div id="probability">
+                <div>
                     <p>Webhook probability: <span class="probability display"></span></p>
                     <input type="range" name="probability" id="probability" min="0" max="1" step="0.1">
                 </div>
-                <div id="url">
+                <div>
                     <p>Webhook url: <span class="url display"></span></p>
                     <input type="text" id="url" placeholder="Your webhook url">
+                </div>
+                <div>
+                    <p>Message: <span class="message display"></span></p>
+                    <input type="text" id="message" placeholder="The message you want to send">
                 </div>
                 <button class="modalButton close webhook">Close</button>
             </div>
