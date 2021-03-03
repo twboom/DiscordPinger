@@ -22,9 +22,6 @@ pinger.interface.popularity = function() {
     console.log('[ Pinger ] Updated popularity to ' + slider.value)
 }
 
-document.querySelector('input#popularity').addEventListener('mouseup', pinger.interface.popularity)
-document.querySelector('input#tickspeed').addEventListener('mouseup', pinger.interface.tickspeed)
-
 pinger.interface.init = function() {
     function tickspeed() {
         const display = document.querySelector('span.tickspeed.display');
@@ -41,5 +38,10 @@ pinger.interface.init = function() {
     tickspeed();
     popularity();
 }
+
+document.querySelector('input#popularity').addEventListener('mouseup', pinger.interface.popularity)
+document.querySelector('input#tickspeed').addEventListener('mouseup', pinger.interface.tickspeed)
+
+document.querySelector('button#start').addEventListener('click', pinger.start)
 
 pinger.interface.init()
