@@ -4,6 +4,7 @@ pinger.utility = [];
 pinger.config = {
     'tickspeed': 1, // This is in seconds
     'popularity': 0.2,
+    'callProbability': 0.1,
     'chances': {
         'notification': 45,
         'mute': 20,
@@ -15,10 +16,12 @@ pinger.config = {
         'call': 0.1
     },
     'callOnly': ['mute', 'leave', 'join'],
-    'ringTimeout': 30000 // This is in milliseconds
+    'ringTimeout': 30000, // This is in milliseconds
+    'callTimout': 30000
 }
 pinger.active = false;
 pinger.inCall = false;
+pinger.lastCall = 0;
 pinger.latestRing = 0;
 
 pinger.isRinging = function() {
@@ -43,7 +46,7 @@ pinger.play = function() {
             if ((Math.random() < pinger.config.easteregg[option]) ? true : false)
             option += '-easteregg'
         }
-        if (option === 'call') { pinger.latestRing = Date.now() }
+        if (option === 'call') { pinger.latestRing = Date.now(); pinger.call.logic() }
         const path = pinger.sounds[option]
         const audio = new Audio(path)
         audio.play()
@@ -95,6 +98,41 @@ pinger.update.tickspeed = function(tickspeed) {
     clearInterval(pinger.clock);
     pinger.clock = setInterval(pinger.play, pinger.config.tickspeed * 1000)
 }
+
+/* Smart call taking */
+pinger.call = [];
+
+pinger.call.take = function() {
+    const path = pinger.sounds.join;
+    const audio = new Audio(path);
+    audio.play();
+    pinger.inCall = true;
+};
+
+pinger.call.hang = function() {
+    pinger.lastCall = Date.now();
+    const path = pinger.sounds.leave;
+    const audio = new Audio(path);
+    audio.play();
+    pinger.inCall = false;
+};
+
+pinger.call.logic = function () {
+    if (pinger.call.conditions()) { return; }
+    if (Math.random() < pinger.config.popularity) { return }
+    pinger.call.take();
+    setTimeout(pinger.call.hang, 60000)
+};
+
+pinger.call.conditions = function() {
+    let conditions = []
+    if (pinger.inCall === true) { conditions.push('call') };
+    if (Date.now() - pinger.lastCall < pinger.callTimout) { conditions.push('timout') };
+    console.log(conditions)
+
+    if (conditions.length !== 0) { return true }
+}
+
 
 /* Real Discord pings */
 pinger.webhook = [];

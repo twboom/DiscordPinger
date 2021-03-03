@@ -3,7 +3,8 @@ pinger.interface = [];
 pinger.interface.config = {
     'root': ['tickspeed', 'popularity'],
     'chances': ['notification', 'call', 'join', 'leave', 'mute'],
-    'webhook': ['probability', 'url', 'message']
+    'webhook': ['probability', 'url', 'message'],
+    'call': ['callProbability']
 }
 
 pinger.utility.getTarget = function(label) {
@@ -22,6 +23,9 @@ pinger.utility.getTarget = function(label) {
             case 'webhook':
                 target = pinger.webhook.config
                 break;
+            
+            case 'call':
+                target = pinger.config
         }
     }
     return target
@@ -58,7 +62,7 @@ document.querySelector('button#start').addEventListener('click', function(evt) {
 document.querySelectorAll('.modalButton').forEach(item => {
     item.addEventListener('click', function(evt) {
         let action = 'block'
-        if (evt.target.classList[1] === 'close') { action = 'none'}
+        if (evt.target.classList[1] === 'close') { action = 'none' }
         const modal = evt.target.classList[2];
         document.querySelector('div#' + modal + 'Modal').style.display = action
     })

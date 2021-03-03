@@ -33,6 +33,7 @@
             <p id="buttons">
                 <button class="modalButton open advanced">Advanced options</button>
                 <button class="modalButton open webhook">Webhook options</button>
+                <button class="modalButton open call">Auto Call options</button>
             </p>
         </div>
 
@@ -79,6 +80,15 @@
                     <input type="text" id="message" placeholder="The message you want to send">
                 </div>
                 <button class="modalButton close webhook">Close</button>
+            </div>
+        </div>
+        <div id="callModal" class="modal">
+            <div class="modalContent">
+                <div>
+                    <p>Call take probability: <span class="callProbability display"></span></p>
+                    <input type="range" name="callProbability" id="callProbability" min="0" max="1" step="0.1" value="0">
+                </div>
+                <button class="modalButton close call">Close</button>
             </div>
         </div>
     </main>
