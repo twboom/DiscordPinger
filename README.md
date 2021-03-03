@@ -1,2 +1,2 @@
-# DiscordPing
+# DiscordPinger
 Like the Discord ping prank video's, but on a website....
