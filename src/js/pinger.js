@@ -106,7 +106,8 @@ pinger.webhook.config = {
 
 pinger.webhook.send = function() {
     if ((Math.random() < pinger.webhook.config.probability) ? false : true) { return }
-    if (pinger.webhook.config.url === '' || pinger.webhook.config.url === '') { return }
+    if (pinger.webhook.config.url === '') { return }
+    if (pinger.webhook.config.message === '') {pinger.webhook.config.message = 'You just got PINGED by DiscordPinger'}
     const request = new XMLHttpRequest();
     request.open('POST', pinger.webhook.config.url);
     request.setRequestHeader('Content-type', 'application/json');

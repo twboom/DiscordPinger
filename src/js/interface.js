@@ -31,10 +31,11 @@ pinger.interface.update = function(evt) {
     const slider = evt.target;
     const display = document.querySelector('span.' + slider.id + '.display');
     const target = pinger.utility.getTarget(slider.id);
-    display.innerHTML = slider.value;
-    if (slider.id === 'tickspeed') { pinger.update.tickspeed(slider.value); return; };
+    if (slider.id === 'tickspeed') { pinger.update.tickspeed(slider.value) };
     target[slider.id] = slider.value;
-    
+    console.log('[ Pinger ] Updating ' + slider.id + ' to ' + slider.value)
+    if (display === null) { return };
+    display.innerHTML = slider.value;
 }
 
 pinger.interface.init = function() {
@@ -66,6 +67,7 @@ document.querySelectorAll('.modalButton').forEach(item => {
 
 document.querySelectorAll('input').forEach(item => {
     item.addEventListener('mouseup', pinger.interface.update)
+    item.addEventListener('touchend', pinger.interface.update)
 })
 
 pinger.interface.init()
