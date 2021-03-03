@@ -30,6 +30,34 @@
             <div class="start">
                 <button id="start">Start</button>
             </div>
+            <button id="openAdvanced">Advanced options</button>
+        </div>
+        <div id="modal">
+            <div id="advanced">
+                <div id="chances">
+                    <div class="notification">
+                        <p>Notification chance: <span class="notification display"></span></p>
+                        <input type="range" name="notification" id="notification" min="0" max="100" step="1">
+                    </div>
+                    <div class="call">
+                        <p>Call chance: <span class="call display"></span></p>
+                        <input type="range" name="call" id="call" min="0" max="100" step="1">
+                    </div>
+                    <div class="join">
+                        <p>Join chance: <span class="join display"></span></p>
+                        <input type="range" name="join" id="join" min="0" max="100" step="1">
+                    </div>
+                    <div class="leave">
+                        <p>Leave chance: <span class="leave display"></span></p>
+                        <input type="range" name="leave" id="leave" min="0" max="100" step="1">
+                    </div>
+                    <div class="mute">
+                        <p>Mute chance: <span class="mute display"></span></p>
+                        <input type="range" name="mute" id="mute" min="0" max="100" step="1">
+                    </div>
+                </div>
+                <button id="closeAdvanced">Close</button>
+            </div>
         </div>
     </main>
     <script src="js/interface.js"></script>

@@ -44,4 +44,12 @@ document.querySelector('input#tickspeed').addEventListener('mouseup', pinger.int
 
 document.querySelector('button#start').addEventListener('click', pinger.toggle)
 
+document.querySelector('button#openAdvanced').addEventListener('click', function() {
+    document.querySelector('div#modal').style.display = 'block'
+})
+
+document.querySelector('button#closeAdvanced').addEventListener('click', function() {
+    document.querySelector('div#modal').style.display = 'none'
+})
+
 pinger.interface.init()
