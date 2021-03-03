@@ -1,5 +1,11 @@
 pinger.interface = [];
 
+pinger.interface.config = {
+    'root': ['tickspeed', 'popularity'],
+    'chances': ['notification', 'call', 'join', 'leave', 'mute'],
+    'webhook': ['probability', 'url']
+}
+
 pinger.interface.update = function(evt) {
     const slider = evt.target;
     console.log('[ Pinger ] Updating ' + slider.id + ' to ' + slider.value);
@@ -27,13 +33,15 @@ document.querySelector('button#start').addEventListener('click', function(evt) {
     if (pinger.active === true) { evt.target.innerHTML = 'Start'; pinger.toggle(); return };
 })
 
-document.querySelector('button#openAdvanced').addEventListener('click', function() {
-    document.querySelector('div#modal').style.display = 'block'
+document.querySelectorAll('.modalButton').forEach(item => {
+    item.addEventListener('click', function(evt) {
+        let action = 'block'
+        if (evt.target.classList[1] === 'close') { action = 'none'}
+        const modal = evt.target.classList[2];
+        document.querySelector('div#' + modal + 'Modal').style.display = action
+    })
 })
 
-document.querySelector('button#closeAdvanced').addEventListener('click', function() {
-    document.querySelector('div#modal').style.display = 'none'
-})
 
 document.querySelectorAll('input').forEach(item => {
     item.addEventListener('mouseup', pinger.interface.update)

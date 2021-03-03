@@ -87,7 +87,7 @@ pinger.toggle = function() {
 
 pinger.update = [];
 pinger.update.tickspeed = function(tickspeed) {
-    console.log('[ Pinger ] Updated tickspeed to ' + tickspeed + ' seconds')
+    console.log('[ Pinger ] Updated tickspeed to ' + tickspeed + ' ms')
     pinger.config.tickspeed = tickspeed
     if(pinger.active === false) { return };
     clearInterval(pinger.clock);
@@ -97,7 +97,8 @@ pinger.update.tickspeed = function(tickspeed) {
 pinger.webhook = [];
 pinger.webhook.config = {
     'url': '',
-    'message': ''
+    'message': '',
+    'probability': 0
 }
 
 pinger.webhook.send = function() {

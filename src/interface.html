@@ -30,10 +30,15 @@
             <div class="start">
                 <button id="start">Start</button>
             </div>
-            <p id="buttons"><button id="openAdvanced">Advanced options</button></p>
+            <p id="buttons">
+                <button class="modalButton open advanced">Advanced options</button>
+                <button class="modalButton open webhook">Webhook options</button>
+            </p>
         </div>
-        <div id="modal">
-            <div id="advanced">
+
+
+        <div id="advancedModal" class="modal">
+            <div class="modalContent">
                 <div id="chances">
                     <div class="notification">
                         <p>Notification chance: <span class="notification display"></span></p>
@@ -56,7 +61,20 @@
                         <input type="range" name="mute" id="mute" min="0" max="100" step="1">
                     </div>
                 </div>
-                <button id="closeAdvanced">Close</button>
+                <button class="modalButton close advanced">Close</button>
+            </div>
+        </div>
+        <div id="webhookModal" class="modal">
+            <div class="modalContent">
+                <div id="probability">
+                    <p>Webhook probability: <span class="probability display"></span></p>
+                    <input type="range" name="probability" id="probability" min="0" max="1" step="0.1">
+                </div>
+                <div id="url">
+                    <p>Webhook url: <span class="url display"></span></p>
+                    <input type="text" id="url" placeholder="Your webhook url">
+                </div>
+                <button class="modalButton close webhook">Close</button>
             </div>
         </div>
     </main>

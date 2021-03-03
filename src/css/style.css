@@ -34,14 +34,24 @@ button {
 button:hover {
     background-color: darkslateblue;
     color: whitesmoke;
-    width: 7vw;
+    width: 10vw;
+}
+
+input[type=text] {
+    border: hidden;
+    border-radius: 4px;;
+    outline: none;
+    padding: 4px;
+    font-family: 'Roboto Mono';
+    width: 50%;
+    background-color: whitesmoke;
 }
 
 button:active {
     background-color: tomato;
 }
 
-button#openAdvanced {
+button.modalButton {
     width: max-content;
 }
 
@@ -52,8 +62,7 @@ button#openAdvanced {
     text-align: center;
 }
 
-div#modal {
-    display: none;
+div.modal {
     position: fixed;
     z-index: 1;
     left: 0;
@@ -62,7 +71,15 @@ div#modal {
     height: 100%;
 }
 
-div#advanced {
+div#advancedModal {
+    display: none;
+}
+
+div#webhookModal {
+    display: none;
+}
+
+div.modalContent {
     text-align: center;
     padding: 16px;
     border: hidden;
