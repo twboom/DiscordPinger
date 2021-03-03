@@ -74,4 +74,8 @@ document.querySelectorAll('input').forEach(item => {
     item.addEventListener('touchend', pinger.interface.update)
 })
 
+document.querySelectorAll('input[type=text]').forEach(item => {
+    item.addEventListener('keydown')
+})
+
 pinger.interface.init()
