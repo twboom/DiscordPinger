@@ -16,6 +16,35 @@ pinger.interface.update = function(evt) {
 
 pinger.interface.init = function() {
     document.querySelectorAll('span.display').forEach(item => {
+        const label = item.classList[0];
+        const display = document.querySelector('span.' + label);
+        const slider = document.querySelector('input#' + label);
+        let target;
+        for (const [key, value] of Object.entries(pinger.interface.config)) {
+            if (value.includes(label) === false) { continue }
+            console.log(label + ': ' + key)
+            switch (key) {
+                case 'root':
+                    target = pinger.config
+                    break;
+
+                case 'chances':
+                    target = pinger.config.chances
+                    break;
+
+                case 'webhook':
+                    target = pinger.webhook.config
+                    break;
+            }
+        }
+        const value = target[label]
+        display.innerHTML = value;
+        slider.value = value;
+    })
+    
+
+    /*
+    document.querySelectorAll('span.display').forEach(item => {
         const label = item.classList[0]
         const display = document.querySelector('span.' + label)
         const slider = document.querySelector('input#' + label)
@@ -26,6 +55,7 @@ pinger.interface.init = function() {
         display.innerHTML = value;
         slider.value = value
     })
+    */
 }
 
 document.querySelector('button#start').addEventListener('click', function(evt) {
