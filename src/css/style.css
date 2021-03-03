@@ -2,8 +2,43 @@
 
 body {
     font-family: 'Roboto Mono';
+    background-color: #181A1B;
+    color: white
+}
+
+a {
+    color: white;
 }
 
 .header {
+    text-align: center;
+}
+
+button {
+    outline: none;
+    border: hidden;
+    font-family: 'Roboto Mono';
+    background-color: whitesmoke;
+    padding: 16px;
+    width: 5.5vw;
+    margin-top: 2.5vh;
+    transition: 0.5s;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: darkslateblue;
+    color: whitesmoke;
+    width: 7vw;
+}
+
+button:active {
+    background-color: tomato;
+}
+
+#controls {
+    margin: auto;
+    margin-top: 10vh;
+    width: fit-content;
     text-align: center;
 }
