@@ -1,8 +1,8 @@
 let pinger = []
 // Config
 pinger.config = {
-    'tickspeed': 1000,
-    'popularity': 1,
+    'tickspeed': 1000, // This is in milliseconds
+    'popularity': 0.2,
     'chances': {
         'notification': 45,
         'mute': 20,
@@ -22,7 +22,6 @@ pinger.latestRing = 0;
 
 pinger.isRinging = function() {
     const time = Date.now() - pinger.latestRing;
-    console.log(time)
     if (time < pinger.config.ringTimeout) { return true }
     else { return false }
 };
