@@ -75,7 +75,9 @@ document.querySelectorAll('input').forEach(item => {
 })
 
 document.querySelectorAll('input[type=text]').forEach(item => {
-    item.addEventListener('keydown')
+    item.addEventListener('keydown', function(evt) {
+        
+    })
 })
 
 pinger.interface.init()
