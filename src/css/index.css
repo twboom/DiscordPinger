@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+body {
+    font-family: 'Roboto Mono';
+    background-color: #181A1B;
+    color: white
+}
+
+.header {
+    text-align: center;
+}
+
+a {
+    color: white;
+}
+
+main {
+    width: 70vw;
+    margin: auto;
+}
