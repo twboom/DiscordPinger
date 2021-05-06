@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DiscordPinger</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/pinger.js"></script>
+    <script src="js/interface.js"></script>
+</head>
+<body>
+    <header>
+        <h1 class="header">DiscordPinger</h1>
+        <p class="header">
+            <a href="https://github.com/twboom/discordpinger" class="header">Source Code</a>
+            |            
+            <a href="http://thijsboom.com" class="header">Maker</a>
+        </p>
+    </header>
+
+    <main>
+        <section id="controls">
+            <div class="tickspeed">
+                <p>Tickspeed: <span class="tickspeed display"></span></p>
+                <input type="range" name="tickspeed" id="tickspeed" min="0" max="10" step="0.1" value="1">
+            </div>
+            <div class="popularity">
+                <p>Popularity: <span class="popularity display"></span></p>
+                <input type="range" name="popularity" id="popularity" min="0" max="1" step="0.1">
+            </div>
+            <div class="start">
+                <button id="start">Start</button>
+            </div>
+        </section>
+
+        <section id="modal-buttons"></section>
+
+        <section id="modal"></section>
+    </main>
+</body>
+</html>
